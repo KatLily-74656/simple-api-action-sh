@@ -1,0 +1,31 @@
+# action.yml
+name: 'Simple API'
+description: 'Simple API to make a post request'
+inputs:
+  post-body:  # id of input
+    description: 'json'
+    required: true
+    default: '{\"name\":\"test\"}'
+outputs:
+  post-result: # id of output
+    description: 'result of the post request'
+    value: ${{ steps.result.outputs.post-result }}
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+    - run: npm install
+      shell: bash
+    - run: npm start
+      shell: bash
+    - uses: 
+      id: result
+      run: |
+        apt-get update; apt-get install -y curl >/dev/null
+        response=$(curl -s -X POST -d '${{ inputs.post-body }}' -H 'Content-Type: application/json' http://localhost:3000/handle)
+        echo $result
+        echo "::set-output name=post-result::$(echo $result)""
+      shell: bash
