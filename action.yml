@@ -21,8 +21,7 @@ runs:
       shell: bash
     - run: npm start
       shell: bash
-    - uses: 
-      id: result
+    - id: result
       run: |
         apt-get update; apt-get install -y curl >/dev/null
         response=$(curl -s -X POST -d '${{ inputs.post-body }}' -H 'Content-Type: application/json' http://localhost:3000/handle)
