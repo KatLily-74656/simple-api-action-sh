@@ -26,5 +26,5 @@ runs:
         sudo apt-get update; sudo apt-get install -y curl >/dev/null
         response=$(curl -s -X POST -d '${{ inputs.post-body }}' -H 'Content-Type: application/json' http://localhost:3000/handle)
         echo $result
-        echo "::set-output name=post-result::$(echo $result)""
+        echo "::set-output name=post-result::$(echo $result)"
       shell: bash
