@@ -28,4 +28,4 @@ runs:
         echo test
         echo $response
         echo $(::set-output name=post-result::$(echo $response))
-      shell: bash
+      shell: sh
